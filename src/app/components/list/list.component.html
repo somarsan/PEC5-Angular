@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="container" [ngClass]="{'table-view': displayTable, 'card-view': !displayTable}">
+  <div class="overlay" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <h1>Rick and Morty Characters</h1>
+
+  <div class="button">
+    <button mat-fab color="primary" (click)="toggleViewCards()" aria-label="Icon button for displaying cards">
+      <mat-icon>view_module</mat-icon>
+    </button>
+    <button mat-fab color="primary" (click)="toggleViewTable()" aria-label="Icon button for displaying table">
+      <mat-icon>list</mat-icon>
+    </button>
+  </div>
+
+  <div [@fadeInOut] *ngIf="displayTable">
+    <app-grid [items]="details"></app-grid>
+  </div>
+
+  <div class="card-container" *ngIf="!displayTable">
+    <a *ngFor="let detail of details" [routerLink]="['/detail', detail.id]">
+      <div class="container" [@fadeInOut]>
+        <app-card [item]="detail"></app-card>
+      </div>
+    </a>
+  </div>
+</div>

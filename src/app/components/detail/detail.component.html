@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="overlay" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="detail-container">
+
+    <div class="button">
+      <button mat-fab color="primary" aria-label="Icon button for displaying cards" [routerLink]="['']">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+
+    
+    <mat-accordion *ngIf="loaded">
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                          (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title [@fadeInOut]>
+            <img src="{{ detail.image }}" alt="{{ detail.name }}" class="image-avatar"> {{ detail.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-divider></mat-divider>
+        <p><strong>Last location: </strong><a href="{{ detail.location.url }}" target="_blank">{{ detail.location.name }}</a></p>
+        <p><strong>Species: </strong>{{ detail.species }}</p>
+        <p><strong>Status: </strong>{{ detail.status }}</p>
+        <p><strong>Gender: </strong>{{ detail.gender }}</p>
+        <p><strong>Origin: </strong><a href="{{ detail.origin.url }}" target="_blank">{{ detail.origin.name }}</a></p>
+        <img src="{{ detail.image }}" alt="{{ detail.name }}">
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+  </div>
+
+</div>
+
